@@ -5,7 +5,7 @@
 
 // Now i will paste some german umlauts:
 
-// Hällölle
-// Nürnberg
+// HÃ¤llÃ¶lle
+// NÃ¼rnberg
 
-// another workd: Südkreutz
+// another workd: SÃ¼dkreuz
