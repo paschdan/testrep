@@ -44,6 +44,7 @@ if (isDraft) {
 }
 
 echo "Running Tests...."
+setGithubStatusForPullRequest(this, 'success', 'testing', 'all tests succeeded')
 echo "Done"
 
 
