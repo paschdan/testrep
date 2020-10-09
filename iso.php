@@ -5,5 +5,7 @@
 
 // Now i will paste some german umlauts:
 
-// Hällölle
-// Nürnbergh <- the h needs to go away with a suggestion.
+// HÃ¤llÃ¶lle
+// NÃ¼rnberg
+
+// another workd: SÃ¼dkreuz
