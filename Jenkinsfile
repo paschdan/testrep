@@ -33,8 +33,9 @@ setGithubStatusForPullRequest(this, 'pending', 'testing', 'running acceptance te
 
 
 if (isDraft) {
-    def triggerCause = currentBuild.rawBuild.getCause(org.jenkinsci.plugins.pipeline.github.trigger.IssueCommentCause)
-    if (triggerCause) {
+    def commentTriggerCause = currentBuild.rawBuild.getCause(org.jenkinsci.plugins.pipeline.github.trigger.IssueCommentCause)
+    def reviewTriggerCause = currentBuild.rawBuild.getCause(org.jenkinsci.plugins.pipeline.github.trigger.PullRequestReviewCause)
+    if (commentTriggerCause || reviewTriggerCause) {
         setGithubStatusForPullRequest(this, 'pending', 'testing', 'running acceptance tests on draft pr...')
     } else {
         setGithubStatusForPullRequest(this, 'pending', 'testing', 'please trigger the build when the PR is ready')
