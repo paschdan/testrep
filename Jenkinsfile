@@ -9,12 +9,18 @@ properties([
         ])
 ])
 
-def setGithubStatusForPullRequest = (context, status, prcontext, desc) {
 
-pullRequest.createStatus(status: status,
-                             context: prcontext,
-                             description: desc,
-                             targetUrl: "$RUN_DISPLAY_URL")
+
+def setGithubStatusForPullRequest(script, status, context, description) {
+    if (script.env.CHANGE_ID) {
+        echo "Set github status `${status}` for `${context}` with message `${description}` (${script.env.RUN_DISPLAY_URL})"
+        script.pullRequest.createStatus(
+            status: status,
+            context: context,
+            description: description,
+            targetUrl: "${script.env.RUN_DISPLAY_URL}"
+        )
+    }
 }
 
 setGithubStatusForPullRequest(this, 'pending', 'testing', 'running acceptance tests on draft pr...')
