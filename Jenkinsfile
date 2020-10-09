@@ -10,7 +10,8 @@ def isDraft = (isPR && pullRequest.draft)
 properties([
         buildDiscarder(logRotator(artifactNumToKeepStr: "${maxKeepBuilds}", numToKeepStr: "${maxKeepBuilds}")),
         pipelineTriggers([
-                issueCommentTrigger('.*test acceptance please.*')
+                issueCommentTrigger('.*test acceptance please.*'),
+                pullRequestReview(reviewStates: ['approved'])
         ])
 ])
 
