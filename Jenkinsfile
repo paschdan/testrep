@@ -1,3 +1,8 @@
+def maxKeepBuilds = 50
+if (env.BRANCH_NAME.startsWith('PR')) {
+    maxKeepBuilds = 10
+}
+
 def isPR = env.CHANGE_ID
 
 def isDraft = (isPR && pullRequest.draft)
