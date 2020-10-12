@@ -29,16 +29,12 @@ def setGithubStatusForPullRequest(script, status, context, description) {
     }
 }
 
-setGithubStatusForPullRequest(this, 'pending', 'testing', 'running acceptance tests on draft pr...')
-
-
 if (isDraft) {
-    def commentTriggerCause = currentBuild.rawBuild.getCause(org.jenkinsci.plugins.pipeline.github.trigger.IssueCommentCause)
-    def reviewTriggerCause = currentBuild.rawBuild.getCause(org.jenkinsci.plugins.pipeline.github.trigger.PullRequestReviewCause)
-    if (commentTriggerCause || reviewTriggerCause) {
+    def triggerCause = currentBuild.rawBuild.getCause(org.jenkinsci.plugins.pipeline.github.trigger.PipelineGithubTriggerCause)
+
+    if ( triggerCause ) {
         setGithubStatusForPullRequest(this, 'pending', 'testing', 'running acceptance tests on draft pr...')
     } else {
-        setGithubStatusForPullRequest(this, 'pending', 'testing', 'please trigger the build when the PR is ready')
         currentBuild.result = 'ABORTED'
         error "Aborting Build for draft PR"
         return
