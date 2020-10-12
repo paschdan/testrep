@@ -34,12 +34,12 @@ if (isDraft) {
 	def triggerCause = currentBuild.rawBuild.getCause(org.jenkinsci.plugins.pipeline.github.trigger.PipelineGithubTriggerCause)
 
 		if (triggerCause) {
-			if (${triggerCause.getTriggerCauseType} === "PullRequestReview") {
+			if (triggerCause.getTriggerCauseType == "PullRequestReview") {
 				echo("Build was started by ${triggerCause.userLogin}, who reviewed the PR: " +
 						"\"${triggerCause.state}\", which matches one of " +
 						"\"${triggerCause.reviewStates}\" trigger pattern.")
 			}
-			if (${triggerCause.getTriggerCauseType} === "IssueComment") {
+			if (triggerCause.getTriggerCauseType == "IssueComment") {
 				echo("Build was started by ${triggerCause.userLogin}, who wrote: " +
 						"\"${triggerCause.comment}\", which matches the " +
 						"\"${triggerCause.triggerPattern}\" trigger pattern.")
